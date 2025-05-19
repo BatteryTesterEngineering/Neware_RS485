@@ -1,0 +1,6 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "EG6201")(type "KiCad")(uri "${KIPRJMOD}/components/EG6201")(options "")(descr ""))
+  (lib (name "SP3077EEN_L")(type "KiCad")(uri "${KIPRJMOD}/components/SP3077EEN_L/footprints.pretty")(options "")(descr ""))
+  (lib (name "EG2211")(type "KiCad")(uri "${KIPRJMOD}/components/EG2211")(options "")(descr ""))
+)

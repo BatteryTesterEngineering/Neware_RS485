@@ -1,0 +1,308 @@
+# Neware BTS4000 series RS485 bus definition
+
+[rs485_uart_parameters]
+baudrate = 3000000
+bytesize = 8 # equivalent to "serial.EIGHTBITS" in pyserial
+parity = "N" # equivalent to "serial.PARITY_NONE" in pyserial
+stopbits = 1 # equivalent to "serial.STOPBITS_ONE" in pyserial
+message_length = 36
+
+machines = ["middle_machine", "battery_cycler", "temperature_auxilliary_unit"]
+
+data_types = ["physical_value", "boolean", "enum", "integer"]
+
+[common_message_fields]
+[common_message_fields.machine_id]
+first_byte = 0
+last_byte = 0
+data_type = "uint8"
+value_type = "integer"
+# Machine ID = ((Bus Value * multiplier) / divisor) + offset
+multiplier = 1.0
+divisor = 1.0
+offset = 1.0
+
+[common_message_fields.channel_id]
+first_byte = 1
+last_byte = 1
+data_type = "uint8"
+value_type = "integer"
+# Channel ID = ((Bus Value * multiplier) / divisor) + offset
+multiplier = 1.0
+divisor = 1.0
+offset = 1.0
+
+[common_message_fields.message_type_id]
+first_byte = 2
+last_byte = 2
+data_type = "uint8"
+value_type = "integer"
+
+[common_message_fields.crc]
+first_byte = 3
+last_byte = 3
+data_type = "uint8"
+value_type = "integer"
+
+[messages]
+
+[messages.constant_voltage_charge_request]
+basename = "constant_voltage_charge"
+request = true
+message_type_id = 0x17
+transmitter = "middle_machine"
+receiver = "battery_cycler"
+
+[messages.constant_voltage_charge_request.payload.voltage]
+first_byte = 4
+last_byte = 7
+data_type = "int32"
+byte_order = "little"
+value_type = "physical_value"
+# Physical Value = ((Bus Value * multiplier) / divisor) + offset
+multiplier = 1.0
+divisor = 3225.6
+offset = 0.0
+
+[messages.constant_voltage_charge_acknowledge]
+basename = "constant_voltage_charge"
+request = false
+message_type_id = 0x97
+transmitter = "battery_cycler"
+receiver = "middle_machine"
+payload = {}
+
+[messages.constant_voltage_discharge_request]
+basename = "constant_voltage_discharge"
+request = true
+message_type_id = 0x18
+transmitter = "middle_machine"
+receiver = "battery_cycler"
+
+[messages.constant_voltage_discharge_request.payload.voltage]
+first_byte = 4
+last_byte = 7
+data_type = "int32"
+byte_order = "little"
+value_type = "physical_value"
+# Physical Value = ((Bus Value * multiplier) / divisor) + offset
+multiplier = 1.0
+divisor = 3225.6
+offset = 0.0
+
+[messages.constant_voltage_discharge_acknowledge]
+basename = "constant_voltage_discharge"
+request = false
+message_type_id = 0x98
+transmitter = "battery_cycler"
+receiver = "middle_machine"
+payload = {}
+
+[messages.constant_current_charge_request]
+basename = "constant_current_charge"
+request = true
+message_type_id = 0x1A
+transmitter = "middle_machine"
+receiver = "battery_cycler"
+
+[messages.constant_current_charge_request.payload.current]
+first_byte = 4
+last_byte = 7
+data_type = "int32"
+byte_order = "little"
+value_type = "physical_value"
+# Physical Value = ((Bus Value * multiplier) / divisor) + offset
+multiplier = 1.0
+divisor = "current_range"
+offset = 0.0
+
+[messages.constant_current_charge_request.payload.current_range]
+first_byte = "8"
+last_byte = "8"
+data_type = "uint8"
+value_type = "enum"
+enum_bus_mapping = { low_range = 0x00, mid_range = 0x01, high_range = 0x02 }
+enum_value_mapping = { low_range = 16128.0, mid_range = 2688.0, high_range = 1344.0 }
+enum_physical_bounds_mapping = { low_range = 1.0, mid_range = 6.0, high_range = 12.0 }
+
+[messages.constant_current_charge_acknowledge]
+basename = "constant_current_charge"
+request = false
+message_type_id = 0x9A
+transmitter = "battery_cycler"
+receiver = "middle_machine"
+payload = {}
+
+[messages.constant_current_discharge_request]
+basename = "constant_current_discharge"
+request = true
+message_type_id = 0x1B
+transmitter = "middle_machine"
+receiver = "battery_cycler"
+
+[messages.constant_current_discharge_request.payload.current]
+first_byte = 4
+last_byte = 7
+data_type = "int32"
+byte_order = "little"
+value_type = "physical_value"
+# Physical Value = ((Bus Value * multiplier) / divisor) + offset
+multiplier = 1.0
+divisor = "current_range"
+offset = 0.0
+
+[messages.constant_current_discharge_request.payload.current_range]
+first_byte = "8"
+last_byte = "8"
+data_type = "uint8"
+value_type = "enum"
+enum_bus_mapping = { low_range = 0x00, mid_range = 0x01, high_range = 0x02 }
+enum_value_mapping = { low_range = 16128.0, mid_range = 2688.0, high_range = 1344.0 }
+enum_physical_bounds_mapping = { low_range = 1.0, mid_range = 6.0, high_range = 12.0 }
+
+[messages.constant_current_discharge_acknowledge]
+basename = "constant_current_discharge"
+request = false
+message_type_id = 0x9B
+transmitter = "battery_cycler"
+receiver = "middle_machine"
+payload = {}
+
+[messages.constant_power_discharge_request]
+basename = "constant_power_discharge"
+request = true
+message_type_id = 0x1C
+transmitter = "middle_machine"
+receiver = "battery_cycler"
+
+[messages.constant_power_discharge_request.payload.power]
+first_byte = 4
+last_byte = 7
+data_type = "int32"
+byte_order = "little"
+value_type = "physical_value"
+# Physical Value = ((Bus Value * multiplier) / divisor) + offset
+multiplier = 1.0
+divisor = "power_range"
+offset = 0.0
+
+[messages.constant_power_discharge_request.payload.power_range]
+first_byte = "12"
+last_byte = "12"
+data_type = "uint8"
+value_type = "enum"
+enum_bus_mapping = { low_range = 0x00, mid_range = 0x01, high_range = 0x02 }
+enum_value_mapping = { low_range = 1.0, mid_range = 1.0, high_range = 268.8 }
+enum_physical_bounds_mapping = { low_range = 0.0, mid_range = 0.0, high_range = 60.0 }
+
+[messages.constant_power_discharge_acknowledge]
+basename = "constant_power_discharge"
+request = false
+message_type_id = 0x9C
+transmitter = "battery_cycler"
+receiver = "middle_machine"
+payload = {}
+
+[messages.voltage_and_current_request]
+basename = "voltage_and_current"
+request = true
+message_type_id = 0x1F
+transmitter = "middle_machine"
+receiver = "battery_cycler"
+payload = {}
+
+[messages.voltage_and_current_acknowledge]
+basename = "voltage_and_current"
+request = false
+message_type_id = 0x9F
+transmitter = "battery_cycler"
+receiver = "middle_machine"
+
+[messages.voltage_and_current_acknowledge.payload.voltage]
+first_byte = 4
+last_byte = 7
+data_type = "int32"
+byte_order = "little"
+value_type = "physical_value"
+# Physical Value = ((Bus Value * multiplier) / divisor) + offset
+multiplier = 1.0
+divisor = 3225.6
+offset = 0.0
+
+[messages.voltage_and_current_acknowledge.payload.current]
+first_byte = 8
+last_byte = 11
+data_type = "int32"
+byte_order = "little"
+value_type = "physical_value"
+# Physical Value = ((Bus Value * multiplier) / divisor) + offset
+multiplier = 1.0
+divisor = "current_range"
+offset = 0.0
+
+[messages.voltage_and_current_acknowledge.payload.current_range]
+first_byte = "33"
+last_byte = "33"
+data_type = "uint8"
+value_type = "enum"
+enum_bus_mapping = { low_range = 0x00, mid_range = 0x01, high_range = 0x02 }
+enum_value_mapping = { low_range = 16128.0, mid_range = 2688.0, high_range = 1344.0 }
+enum_physical_bounds_mapping = { low_range = 1.0, mid_range = 6.0, high_range = 12.0 }
+
+[messages.voltage_and_current_acknowledge.payload.channel_status]
+first_byte = "35"
+last_byte = "35"
+data_type = "uint8"
+value_type = "enum"
+enum_bus_mapping = { channel_active = 0x00, channel_invalid = 0x01, channel_rest = 0x06 }
+
+[messages.end_of_test_request]
+basename = "end_of_test"
+request = true
+message_type_id = 0x25
+transmitter = "middle_machine"
+receiver = "battery_cycler"
+payload = {}
+
+[messages.end_of_test_acknowledge]
+basename = "end_of_test"
+request = false
+message_type_id = 0xA5
+transmitter = "battery_cycler"
+receiver = "middle_machine"
+payload = {}
+
+[messages.constant_power_charge_request]
+basename = "constant_power_charge"
+request = true
+message_type_id = 0x31
+transmitter = "middle_machine"
+receiver = "battery_cycler"
+
+[messages.constant_power_charge_request.payload.power]
+first_byte = 4
+last_byte = 7
+data_type = "int32"
+byte_order = "little"
+value_type = "physical_value"
+# Physical Value = ((Bus Value * multiplier) / divisor) + offset
+multiplier = 1.0
+divisor = "power_range"
+offset = 0.0
+
+[messages.constant_power_charge_request.payload.power_range]
+first_byte = "12"
+last_byte = "12"
+data_type = "uint8"
+value_type = "enum"
+enum_bus_mapping = { low_range = 0x00, mid_range = 0x01, high_range = 0x02 }
+enum_value_mapping = { low_range = 1.0, mid_range = 1.0, high_range = 268.8 }
+enum_physical_bounds_mapping = { low_range = 0.0, mid_range = 0.0, high_range = 60.0 }
+
+[messages.constant_power_charge_acknowledge]
+basename = "constant_power_charge"
+request = false
+message_type_id = 0xB1
+transmitter = "battery_cycler"
+receiver = "middle_machine"
+payload = {}

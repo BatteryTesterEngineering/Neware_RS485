@@ -1,0 +1,99 @@
+PCBNEW-LibModule-V1  2025-05-07 14:09:35
+# encoding utf-8
+Units mm
+$INDEX
+EG2211
+$EndINDEX
+$MODULE EG2211
+Po 0 0 0 15 681b5b8f 00000000 ~~
+Li EG2211
+Cd EG2211-3
+Kw Switch
+Sc 0
+At STD
+AR 
+Op 0 0 0
+T0 2.000 1 1.27 1.27 0 0.254 N V 21 N "S**"
+T1 2.000 1 1.27 1.27 0 0.254 N I 21 N "EG2211"
+DS -3 -4 7 -4 0.1 24
+DS 7 -4 7 2 0.1 24
+DS 7 2 -3 2 0.1 24
+DS -3 2 -3 -4 0.1 24
+DS -4.7 -5 8.7 -5 0.1 24
+DS 8.7 -5 8.7 7 0.1 24
+DS 8.7 7 -4.7 7 0.1 24
+DS -4.7 7 -4.7 -5 0.1 24
+DS -0.5 2 -0.5 6 0.1 24
+DS -0.5 6 2.5 6 0.1 24
+DS 2.5 6 2.5 2 0.1 24
+DS -0.5 2 -0.5 6 0.2 21
+DS -0.5 6 2.5 6 0.2 21
+DS 2.5 6 2.5 2 0.2 21
+DS -3 0.5 -3 2 0.2 21
+DS -3 2 7 2 0.2 21
+DS 7 2 7 0.5 0.2 21
+DS -3 -2.5 -3 -4 0.2 21
+DS -3 -4 7 -4 0.2 21
+DS 7 -4 7 -2.5 0.2 21
+DS -4 -0 -4 -0 0.1 21
+DS -4.1 -0 -4.1 -0 0.1 21
+DA -4.05 -0 -4.000 -0 -1800 0.1 21
+DA -4.05 -0 -4.100 -0 -1800 0.1 21
+$PAD
+Po 0.000 -0
+Sh "1" R 1.300 1.300 0 0 900
+Dr 0.8 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+$EndPAD
+$PAD
+Po 2.000 -0
+Sh "2" C 1.300 1.300 0 0 900
+Dr 0.8 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+$EndPAD
+$PAD
+Po 4.000 -0
+Sh "3" C 1.300 1.300 0 0 900
+Dr 0.8 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+$EndPAD
+$PAD
+Po 0.000 -2
+Sh "4" C 1.300 1.300 0 0 900
+Dr 0.8 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+$EndPAD
+$PAD
+Po 2.000 -2
+Sh "5" C 1.300 1.300 0 0 900
+Dr 0.8 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+$EndPAD
+$PAD
+Po 4.000 -2
+Sh "6" C 1.300 1.300 0 0 900
+Dr 0.8 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+$EndPAD
+$PAD
+Po -2.800 -1
+Sh "MH1" C 1.800 1.800 0 0 900
+Dr 1.2 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+$EndPAD
+$PAD
+Po 6.800 -1
+Sh "MH2" C 1.800 1.800 0 0 900
+Dr 1.2 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+$EndPAD
+$EndMODULE EG2211
+$EndLIBRARY
